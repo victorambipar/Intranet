@@ -42,7 +42,7 @@
                         <h3 class="panel-title">Intranet</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form">
+                        <form action="../php/login/validationLogin.php" method="POST" role="form">
                             <fieldset>
                                 <br>
                                 <center>
@@ -55,13 +55,17 @@
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Senha" name="password" type="password" value="">
                                 </div>
-                                <div class="checkbox">
+                                <!--<div class="checkbox">
                                     <label>
-                                        <input name="remember" type="checkbox" value="Remember Me">Lembre-me
+                                        <input name="remember" type="checkbox" value="Remember Me">Matenha-me conectado
                                     </label>
-                                </div>
+                                </div>-->
                                 <!-- Change this to a button or input when using this as a form -->
-                                <a href="index.html" class="btn btn-lg btn-success btn-block" style="background-color:#d50004;border-color:#d50004">Entrar</a>
+                                <center>
+                                <a href="">Esqueci minha senha<a>
+                                </center>
+                                <br>
+                                <input type="submit" value="Entrar"class="btn btn-lg btn-success btn-block" style="background-color:#ef4142;border-color:#ef4142"></input>
                             </fieldset>
                         </form>
                     </div>
