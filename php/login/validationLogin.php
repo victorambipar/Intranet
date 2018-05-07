@@ -24,7 +24,7 @@
         }
         else
         {
-            echo "<body onLoad=\"window.location='../../pages/index.html'\">";
+            echo "<body onLoad=\"window.location='../../pages/index.php'\">";
             $query2 = mysqli_query($database,"SELECT * FROM users WHERE email_user=\"$email\" AND password_user=\"$password_criptografy\"");
             while($row = mysqli_fetch_assoc($query2))
             {

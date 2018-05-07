@@ -55,10 +55,13 @@
         foreach($obj as $id)
         {
         $name = $id['name_user'];
+        $second_name = $id['second_name_user'];
         $date1 = $id['birthday_user'];
         }
 
         $date = preg_split('[-]', $date1);
+
+
 
     ?>
 
@@ -82,12 +85,11 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Minha conta</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Sair
+                    </a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -114,14 +116,14 @@
                         </li>
                         
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Painel</a>
+                            <a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Painel</a>
                         </li>
                         
                         <li>
-                            <a href="tables.html"><i class="fa fa-comments fa-fw"></i> Notificações</a>
+                            <a href="index.php"><i class="fa fa-comments fa-fw"></i> Notificações</a>
                         </li>
                         <li>
-                            <a href="forms.html"><i class="fa fa-table fa-fw"></i> Eventos</a>
+                            <a href="events.php"><i class="fa fa-table fa-fw"></i> Eventos</a>
                         </li>
                     </ul>
                 </div>
@@ -146,30 +148,40 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <ul class="timeline">
-                                <li>
-                                    <div class="timeline-badge"><i class="fa fa-comments"></i>
-                                    </div>
-                                    <div class="timeline-panel">
-                                        <div class="timeline-heading">
-                                            <h4 class="timeline-title">Lorem ipsum dolor</h4>
-                                        </div>
-                                        <div class="timeline-body">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero laboriosam dolor perspiciatis omnis exercitationem. Beatae, officia pariatur? Est cum veniam excepturi. Maiores praesentium, porro voluptas suscipit facere rem dicta, debitis.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="timeline-inverted">
-                                    <div class="timeline-badge"><i class="fa fa-comments"></i>
-                                    </div>
-                                    <div class="timeline-panel">
-                                        <div class="timeline-heading">
-                                            <h4 class="timeline-title">Lorem ipsum dolor</h4>
-                                        </div>
-                                        <div class="timeline-body">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt obcaecati, quaerat tempore officia voluptas debitis consectetur culpa amet, accusamus dolorum fugiat, animi dicta aperiam, enim incidunt quisquam maxime neque eaque.</p>
-                                        </div>
-                                    </div>
-                                </li>
+                            <?php
+
+                            require_once("../connection/connection.php");
+                            $database = connection_db();
+                            $query = mysqli_query($database,"SELECT * FROM notifications ORDER BY time_notification DESC LIMIT 5;");
+                            while($row = mysqli_fetch_assoc($query))
+                            {       
+                                $data = array('Select'=>$row);
+                            
+                            $json = json_encode($data);
+                            $obj = json_decode($json,true);
+                            foreach($obj as $id)
+                            {
+                            $title = $id['title_notification'];
+                            $text = $id['text_notification'];
+                            }
+                            
+                            echo " <li>
+                            <div class=\"timeline-badge\"><i class=\"fa fa-comments\"></i>
+                            </div>
+                            <div class=\"timeline-panel\">
+                                <div class=\"timeline-heading\">
+                                    <h4 class=\"timeline-title\">$title</h4>
+                                </div>
+                                <div class=\"timeline-body\">
+                                    <p>$text</p>
+                                </div>
+                            </div>
+                            
+                        </li>";
+                        }
+                            ?> 
+                               
+                              
                             </ul>
                         </div>
                         <!-- /.panel-body -->
@@ -211,8 +223,7 @@
                             <div class="list-group">
                                 <a href="#" class="list-group-item">
                                     <?php
-                                        echo "<i class=\"fa fa-bithday fa-fw\"></i> $name
-                                        <b><span class=\"pull-right text-muted small\"><em>$date[2]/$date[1]</em>
+                                        echo "<i class=\"fa fa-bithday fa-fw\"></i>".$name." ".$second_name."<b><span class=\"pull-right text-muted small\"><em>$date[2]/$date[1]</em>
                                         </span></b>";
                                     ?>
                                 </a>
