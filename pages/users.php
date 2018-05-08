@@ -142,13 +142,7 @@
                         </li>-->
                             
                         <li>
-                            <a href="events.php"><i class="fa fa-dashboard fa-fw"></i> Painel</a>
-                        </li>
-                        <li>
-                            <a href="events.php"><i class="fa fa-comments fa-fw"></i> Notificações</a>
-                        </li>
-                        <li>
-                            <a href="events.php"><i class="fa fa-table fa-fw"></i> Eventos</a>
+                            <a href="events.php"><i class="fa fa-lock fa-fw"></i> Alterar senha</a>
                         </li>
                     </ul>
                 </div>
@@ -162,7 +156,7 @@
     <?php
   echo "<div class=\"form-group\">
     <label for=\"exampleInputEmail1\" style=\"margin-left:270px;\">Email</label>
-    <input type=\"email\" class=\"form-control\" value=\"$email\" id=\"exampleInputEmail1\" style=\"margin-left:270px; margin-right:500px;\" aria-describedby=\"emailHelp\" placeholder=\"Email\">
+    <input type=\"email\" class=\"form-control\" value=\"$email\" disabled=\"disabled\" id=\"exampleInputEmail1\" style=\"margin-left:270px; margin-right:500px;\" aria-describedby=\"emailHelp\" placeholder=\"Email\">
   </div>
   <div class=\"form-group\">
     <label for=\"exampleInputEmail1\" style=\"margin-left:270px;\">Nome</label>
@@ -186,12 +180,13 @@
   </div>
   <div class=\"form-group\">
     <label for=\"exampleInputEmail1\" style=\"margin-left:270px;\">Função</label>
-    <input type=\"text\" class=\"form-control\" id=\"exampleInputEmail1\" value=\"$function\" style=\"margin-left:270px;\" aria-describedby=\"emailHelp\" placeholder=\"Função\">
+    <input type=\"text\" class=\"form-control\" id=\"exampleInputEmail1\" disabled=\"disabled\" value=\"$function\" style=\"margin-left:270px;\" aria-describedby=\"emailHelp\" placeholder=\"Função\">
   </div>
   <div class=\"form-group\">
     <label for=\"exampleInputEmail1\" style=\"margin-left:270px;\">Setor</label>
-    <input type=\"text\" class=\"form-control\" id=\"exampleInputEmail1\" value=\"$sector\" style=\"margin-left:270px;\" aria-describedby=\"emailHelp\" placeholder=\"Setor\">
-  </div>";
+    <input type=\"text\" class=\"form-control\" id=\"exampleInputEmail1\"  disabled=\"disabled\" value=\"$sector\" style=\"margin-left:270px;\" aria-describedby=\"emailHelp\" placeholder=\"Setor\">
+  </div>
+  <button type=\"button\" style=\"margin-left:270px;\" class=\"btn btn-success\">Editar</button>";
   ?>
 </form>
     <!-- /#wrapper -->

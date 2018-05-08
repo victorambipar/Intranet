@@ -171,7 +171,7 @@
                             }
                             
                             echo " <li>
-                            <div class=\"timeline-badge\"><i class=\"fa fa-comments\"></i>
+                            <div class=\"timeline-badge\"><i class=\"fa fa-clock-o\"></i>
                             </div>
                             <div class=\"timeline-panel\">
                                 <div class=\"timeline-heading\">
