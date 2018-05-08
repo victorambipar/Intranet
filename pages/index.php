@@ -59,7 +59,35 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right" style="background-color:#243d5b">
-                <li class="dropdown">
+                
+                    <?php
+                        if($_SESSION['permission'] == 2)
+                        {
+                            echo "<li class=\"dropdown\">
+                            <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">
+                            <i class=\"fa fa-gear fa-fw\" ></i> <i class=\"fa fa-caret-down\"></i>
+                        </a>
+                        <ul class=\"dropdown-menu dropdown-user\" style=\"font-color:#fff\">
+                            <li><a href=\"users.php\"><i class=\"fa fa-clock-o fa-fw\"></i> Atualizações</a>
+                            </li>
+                            <li class=\"divider\"></li>
+                            <li><a href=\"../php/login/finalizeLogin.php\"><i class=\"fa fa-users fa-fw\"></i> Usuários</a></li>
+                            <li class=\"divider\"></li>
+                            <li><a href=\"../php/login/finalizeLogin.php\"><i class=\"fa fa-table fa-fw\"></i> Eventos</a></li>
+                            <li class=\"divider\"></li>
+                            <li><a href=\"../php/login/finalizeLogin.php\"><i class=\"fa fa-comments fa-fw\"></i> Notificações</a></li>
+                            <li class=\"divider\"></li>
+                            <li><a href=\"../php/login/finalizeLogin.php\"><i class=\"fa fa-phone fa-fw\"></i> Ramais</a></li>
+                            <li class=\"divider\"></li>
+                            <li><a href=\"../php/login/finalizeLogin.php\"><i class=\"glyphicon glyphicon-cutlery\"></i> Cardápio</a></li>
+                        </ul>
+                    <!-- /.dropdown-user -->
+                </li>";
+                        }
+                        else{}
+
+                    ?>
+                    <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw" ></i> <i class="fa fa-caret-down"></i>
                     </a>
@@ -169,7 +197,7 @@
                 <div class="col-lg-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Clima atual
+                        <i class="fa fa-cloud fa-fw"></i> Clima atual
                         </div>
                         <!-- /.panel-heading -->
 
@@ -192,7 +220,7 @@
             <div class="col-lg-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Aniversariantes do mês
+                        <i class="fa fa-birthday-cake fa-fw"></i> Aniversariantes do mês
                         </div>
                         <!-- /.panel-heading -->
 
