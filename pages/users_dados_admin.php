@@ -37,30 +37,16 @@
 
 <?php
 
-    session_start();
-        $person_birthday = $_GET['id_person'];
+        
+        session_start();
         require_once("../connection/connection.php");
         $database = connection_db();
         $data = array();
-        $query = mysqli_query($database,"SELECT users.name_user,users.second_name_user,users.ramal_user,users.phone_user,users.birthday_user,users.function_user,sectors.name_sector,users.email_user 
-        FROM users INNER JOIN sectors ON sectors.id_sector = users.sector_user_id WHERE users.id_user = ".$person_birthday.";");
-        while($row = mysqli_fetch_assoc($query))
-        {
-            $data = array('Select'=>$row);
-        }
-        $json = json_encode($data);
-        $obj = json_decode($json,true);
-        foreach($obj as $id)
-        {
-        $name = $id['name_user'];
-        $second_name = $id['second_name_user'];
-        $bd= $id['birthday_user'];
-        $function = $id['function_user'];
-        $sector = $id['name_sector'];
-        $phone = $id['phone_user'];
-        $email = $id['email_user'];
-        $ramal = $id['ramal_user'];
-        }
+        $query = mysqli_query($database,"SELECT users.name_user,users.second_name_user,users.birthday_user,users.function_user,
+        sectors.name_sector,users.email_user,users.phone_user,users.ramal_user,permissions.name_permission FROM users 
+        INNER JOIN sectors ON sectors.id_sector = users.sector_user_id INNER JOIN permissions ON 
+        permissions.id_permission = users.permission_user ORDER BY users.name_user ASC;");
+        
 
 ?>
 
@@ -128,47 +114,91 @@
         <!-- /.dropdown -->
     </ul>
     <div class="navbar-default sidebar" role="navigation">
-                
+
+        
+
+    <img src="../img/img_grupoamb.jpg" style="margin-left:30px">
+    <br><br>
+    <ul class="nav" id="side-menu">
+    <li class="col-md-12" style="margin-left:25px">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Pesquisar...">
+                                <span class="input-group-btn">
+                                <button onclick="window.location.href='index.php'" class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>&bnsp
+                                
+                            </span>
+                            </div>
+                            <div class="input-group custom-search-form">
+                            <span class="input-group-btn">
+                            <button style="margin-top:10px"type="button" class="btn btn-success">Adicionar</button>
+                            <button style="margin-top:10px"type="button" class="btn btn-danger">Remover</button>
+                            <button style="margin-top:10px"type="button" class="btn btn-success">Editar</button>
+                                
+                            </span>
+                            
+                            </div>
+                            
+                            <!-- /input-group -->
+                        </li>
+                        <br><br>
+    </ul>
+    <br>
+<div class="container float-right">
+<div class="col-lg-12">            
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Sobrenome</th>
+        <th>Email</th>
+        <th>Data de nascimento</th>
+        <th>Função</th>
+        <th>Setor</th>
+        <th>Ramal</th>
+        <th>Permissão</th>
+      </tr>
+    </thead>
+    <tbody>
+    <?php
+    while($row = mysqli_fetch_assoc($query))
+    {
+        $data = array('Select'=>$row);
+    
+    $json = json_encode($data);
+    $obj = json_decode($json,true);
+    foreach($obj as $id)
+    {
+    $name = $id['name_user'];
+    $second_name = $id['second_name_user'];
+    $bd= $id['birthday_user'];
+    $function = $id['function_user'];
+    $phone = $id['phone_user'];
+    $email = $id['email_user'];
+    $ramal = $id['ramal_user'];
+    $sector = $id['name_sector'];
+    $permission = $id['name_permission'];
+    }
+      echo "<tr>
+        <td>$name</td>
+        <td>$second_name</td>
+        <td>$email</td>
+        <td>$bd</td>
+        <td>$function</td>
+        <td>$sector</td>
+        <td>$ramal</td>
+        <td>$permission</td>
+      </tr>";
+    }
+      ?>
+    </tbody>
+  </table>
+</div>
+    </div>
     </nav>
     
     <!-- /.navbar-top-links -->
-    <?php echo"<h1 class=\"page-header\" style=\"margin-left:10px;\">".$name." ".$second_name."</h1>";?>
-    <form class="col-md-11">
-    <?php
-  echo "<div class=\"form-group\">
-    <label for=\"exampleInputEmail1\" style=\"margin-left:50px;\">Email</label>
-    <input type=\"email\" class=\"form-control\" value=\"$email\" disabled=\"disabled\" id=\"exampleInputEmail1\" style=\"margin-left:50px; margin-right:500px;\" aria-describedby=\"emailHelp\" placeholder=\"Email\">
-  </div>
-  <div class=\"form-group\">
-    <label for=\"exampleInputEmail1\" style=\"margin-left:50px;\">Nome</label>
-    <input type=\"text\" class=\"form-control\" value=\"$name\" disabled=\"disabled\" id=\"exampleInputEmail1\" style=\"margin-left:50px;\" aria-describedby=\"emailHelp\" placeholder=\"Nome\">
-  </div>
-  <div class=\"form-group\">
-    <label for=\"exampleInputEmail1\" style=\"margin-left:50px;\">Sobrenome</label>
-    <input type=\"text\" class=\"form-control\" value=\"$second_name\" disabled=\"disabled\" id=\"exampleInputEmail1\" style=\"margin-left:50px;\" aria-describedby=\"emailHelp\" placeholder=\"Sobrenome\">
-  </div>
-  <div class=\"form-group\">
-    <label for=\"exampleInputEmail1\" style=\"margin-left:50px;\">Data de nascimento</label>
-    <input type=\"date\" class=\"form-control\" id=\"exampleInputEmail1\" disabled=\"disabled\" value=\"$bd\" style=\"margin-left:50px;width:100%\" aria-describedby=\"emailHelp\" placeholder=\"Data de nascimento\">
-  </div>
-  <div class=\"form-group\">
-    <label for=\"exampleInputEmail1\" style=\"margin-left:50px;\">Telefone</label>
-    <input type=\"tel\" class=\"form-control\" id=\"exampleInputEmail1\" disabled=\"disabled\" value=\"$phone\" style=\"margin-left:50px;\" aria-describedby=\"emailHelp\" placeholder=\"Telefone\">
-  </div>
-  <div class=\"form-group\">
-    <label for=\"exampleInputEmail1\" style=\"margin-left:50px;\">Ramal</label>
-    <input type=\"ext\" class=\"form-control\" id=\"exampleInputEmail1\" disabled=\"disabled\" value=\"$ramal\" style=\"margin-left:50px;\" aria-describedby=\"emailHelp\" placeholder=\"Ramal\">
-  </div>
-  <div class=\"form-group\">
-    <label for=\"exampleInputEmail1\" style=\"margin-left:50px;\">Função</label>
-    <input type=\"text\" class=\"form-control\" id=\"exampleInputEmail1\" disabled=\"disabled\" value=\"$function\" style=\"margin-left:50px;\" aria-describedby=\"emailHelp\" placeholder=\"Função\">
-  </div>
-  <div class=\"form-group\">
-    <label for=\"exampleInputEmail1\" style=\"margin-left:50px;\">Setor</label>
-    <input type=\"text\" class=\"form-control\" id=\"exampleInputEmail1\" disabled=\"disabled\" value=\"$sector\" style=\"margin-left:50px;\" aria-describedby=\"emailHelp\" placeholder=\"Setor\">
-  </div>";
-  ?>
-</form>
     <!-- /#wrapper -->
 
     <!-- jQuery -->
