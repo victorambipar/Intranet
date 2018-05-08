@@ -36,6 +36,9 @@
             {
             $id_user = $id['id_user'];
             }
+            session_start();
+            $_SESSION["id"] = $id_user;
+            $_SESSION["name"] = $id['name_user']." ".$id['second_name_user']; 
             mysqli_query($database,"INSERT INTO logs_users VALUES(null,$id_user,'$hour','$date');");
         }
         

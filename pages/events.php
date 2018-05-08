@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,7 +37,156 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script>
+	
+	<style>
+  
+#wrap {
+  width: 1100px;
+  margin: 0 auto;
+  }
+  
+#external-events {
+  float: left;
+  width: 150px;
+  padding: 0 10px;
+  text-align: left;
+  }
+  
+#external-events h4 {
+  font-size: 16px;
+  margin-top: 0;
+  padding-top: 1em;
+  }
+  
+.external-event { /* try to mimick the look of a real event */
+  margin: 10px 0;
+  padding: 2px 4px;
+  background: #3366CC;
+  color: #fff;
+  font-size: .85em;
+  cursor: pointer;
+  }
+  
+#external-events p {
+  margin: 1.5em 0;
+  font-size: 11px;
+  color: #666;
+  }
+  
+#external-events p input {
+  margin: 0;
+  vertical-align: middle;
+  }
+#calendar {
+/* 		float: right; */
+      margin: 0 auto;
+  width: 900px;
+  background-color: #FFFFFF;
+    border-radius: 6px;
+      box-shadow: 0 1px 2px #C3C3C3;
+  -webkit-box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
+-moz-box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
+box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
+  }
+</style>
+
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; background-color:#243d5b">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- /.navbar-header -->
+
+             <ul class="nav navbar-top-links navbar-right" style="background-color:#243d5b">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw" ></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user" style="font-color:#fff">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Minha conta</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="../php/login/finalizeLogin.php"><i class="fa fa-sign-out fa-fw"></i> Sair
+                    </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>	
+            <!-- /.navbar-top-links -->
+            
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        
+                            <img src="../img/img_grupoamb2.jpg">
+							<br><br>
+                        
+                        <li>
+                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Painel</a>
+                        </li>
+                        
+                        <li>
+                            <a href="tables.html"><i class="fa fa-comments fa-fw"></i> Notificações</a>
+                        </li>
+                        <li>
+                            <a href="forms.html"><i class="fa fa-table fa-fw"></i> Eventos</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+		</nav>
+		
+		
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+					<h1 class="page-header">Eventos</h1>
+					
+					<center>
+        				<div id='wrap'>
+							<div id='calendar'></div>
+							<div style='clear:both'></div>
+						</div>
+					</center>
+			
+                </div>			
+            </div>
+		</div>
+	</div>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="../vendor/raphael/raphael.min.js"></script>
+    <script src="../vendor/morrisjs/morris.min.js"></script>
+    <script src="../data/morris-data.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+	<script src="../dist/js/sb-admin-2.js"></script>
+	<script src="../dist/js/events.js"></script>
+	<script>
 
 	$(document).ready(function() {
 	    var date = new Date();
@@ -195,176 +345,8 @@
 	});
 
 </script>
-<style>
 
-	body {
-	    margin-bottom: 40px;
-		margin-top: 40px;
-		text-align: center;
-		font-size: 14px;
-		font-family: 'Roboto', sans-serif;
-		background:url(http://www.digiphotohub.com/wp-content/uploads/2015/09/bigstock-Abstract-Blurred-Background-Of-92820527.jpg);
-		}
-		
-	#wrap {
-		width: 1100px;
-		margin: 0 auto;
-		}
-		
-	#external-events {
-		float: left;
-		width: 150px;
-		padding: 0 10px;
-		text-align: left;
-		}
-		
-	#external-events h4 {
-		font-size: 16px;
-		margin-top: 0;
-		padding-top: 1em;
-		}
-		
-	.external-event { /* try to mimick the look of a real event */
-		margin: 10px 0;
-		padding: 2px 4px;
-		background: #3366CC;
-		color: #fff;
-		font-size: .85em;
-		cursor: pointer;
-		}
-		
-	#external-events p {
-		margin: 1.5em 0;
-		font-size: 11px;
-		color: #666;
-		}
-		
-	#external-events p input {
-		margin: 0;
-		vertical-align: middle;
-		}
-
-	#calendar {
-/* 		float: right; */
-        margin: 0 auto;
-		width: 900px;
-		background-color: #FFFFFF;
-		  border-radius: 6px;
-        box-shadow: 0 1px 2px #C3C3C3;
-		-webkit-box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
--moz-box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
-box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
-		}
-
-</style>
-  
-
-</head>
-
-<body>
-
-    <div id="wrapper">
-
-        <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <!-- /.navbar-header -->
-
-            <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
-                <!-- /.dropdown -->
-            </ul>
-            <!-- /.navbar-top-links -->
-            
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        
-                            <img src="../img/img_grupoamb2.jpg">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
-                        
-                        <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Painel</a>
-                        </li>
-                        
-                        <li>
-                            <a href="tables.html"><i class="fa fa-comments fa-fw"></i> Notificações</a>
-                        </li>
-                        <li>
-                            <a href="forms.html"><i class="fa fa-table fa-fw"></i> Eventos</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
-            <!-- /.navbar-static-side -->
-        </nav>
-
-        <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Eventos</h1>
-                </div>
-
-                <div id='calendar'></div>
-                <!-- /.col-lg-12 -->
-            </div>
-           
-            <!-- /.row -->
-        </div>
-        <!-- /#page-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
-
-    <!-- jQuery -->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="../vendor/metisMenu/metisMenu.min.js"></script>
-
-    <!-- Morris Charts JavaScript -->
-    <script src="../vendor/raphael/raphael.min.js"></script>
-    <script src="../vendor/morrisjs/morris.min.js"></script>
-    <script src="../data/morris-data.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="../dist/js/sb-admin-2.js"></script>
-    <script src="../dist/js/events.js"></script>
+    
 
 </body>
 

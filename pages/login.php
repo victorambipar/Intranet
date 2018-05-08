@@ -62,10 +62,10 @@
                                 </div>-->
                                 <!-- Change this to a button or input when using this as a form -->
                                 <center>
-                                <a href="">Esqueci minha senha<a>
+                                <a href="" style="color:#455c79">Esqueci minha senha<a>
                                 </center>
                                 <br>
-                                <input type="submit" value="Entrar"class="btn btn-lg btn-success btn-block" style="background-color:#ef4142;border-color:#ef4142"></input>
+                                <input type="submit" value="Entrar"class="btn btn-lg btn-success btn-block" style="background-color:#455c79;border-color:#455c79"></input>
                             </fieldset>
                         </form>
                     </div>

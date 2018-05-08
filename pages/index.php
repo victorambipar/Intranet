@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>Grupo Ambipar - Intranet</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -35,41 +35,19 @@
 
 </head>
 
-<body>
+<body style="background-color:#fff">
 
     <?php
 
-        require_once("../connection/connection.php");
-        $database = connection_db();
-        $today = date('m');
-        $date1 = "";
-        $name = "";
-        $data = array();
-        $query = mysqli_query($database,"SELECT * FROM users WHERE MONTH(birthday_user) = '$today'");
-        while($row = mysqli_fetch_assoc($query))
-        {
-            $data = array('Select'=>$row);
-        }
-        $json = json_encode($data);
-        $obj = json_decode($json,true);
-        foreach($obj as $id)
-        {
-        $name = $id['name_user'];
-        $second_name = $id['second_name_user'];
-        $date1 = $id['birthday_user'];
-        }
-
-        $date = preg_split('[-]', $date1);
-
-
-
+        session_start();
     ?>
 
     <div id="wrapper">
 
         <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 50; background-color:#243d5b">
+        <div class="container">    
+        <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
@@ -77,18 +55,19 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
+    </div>
             <!-- /.navbar-header -->
 
-            <ul class="nav navbar-top-links navbar-right">
+            <ul class="nav navbar-top-links navbar-right" style="background-color:#243d5b">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-user fa-fw" ></i> <i class="fa fa-caret-down"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Minha conta</a>
+                    <ul class="dropdown-menu dropdown-user" style="font-color:#fff">
+                        <li><a href="users.php"><i class="fa fa-user fa-fw"></i> Minha conta</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Sair
+                        <li><a href="../php/login/finalizeLogin.php"><i class="fa fa-sign-out fa-fw"></i> Sair
                     </a>
                         </li>
                     </ul>
@@ -101,26 +80,22 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        
+                        <br>
                             <img src="../img/img_grupoamb2.jpg">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
-                        
-                        <li>
+                        <br><br>
+                        <!--<li>
                             <a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Painel</a>
                         </li>
                         
                         <li>
                             <a href="index.php"><i class="fa fa-comments fa-fw"></i> Notificações</a>
+                        </li>-->
+                       
+                        <li>
+                            <a href="events.php"><i class="fa fa-dashboard fa-fw"></i> Painel</a>
+                        </li>
+                        <li>
+                            <a href="events.php"><i class="fa fa-comments fa-fw"></i> Notificações</a>
                         </li>
                         <li>
                             <a href="events.php"><i class="fa fa-table fa-fw"></i> Eventos</a>
@@ -131,11 +106,13 @@
             </div>
             <!-- /.navbar-static-side -->
         </nav>
-
+        <br><br>
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Bem vindo, </h1>
+                    <?php
+                    echo "<h1 class=\"page-header\">Bem vindo, ".$_SESSION['name']."</h1>";
+                    ?>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -198,7 +175,7 @@
 
                         <div class="panel-body">
                             <div class="list-group">
-                               
+                            
                                 
                             </div>
                             
@@ -221,12 +198,38 @@
 
                         <div class="panel-body">
                             <div class="list-group">
-                                <a href="#" class="list-group-item">
+                                
                                     <?php
-                                        echo "<i class=\"fa fa-bithday fa-fw\"></i>".$name." ".$second_name."<b><span class=\"pull-right text-muted small\"><em>$date[2]/$date[1]</em>
-                                        </span></b>";
+                                        require_once("../connection/connection.php");
+                                        $database = connection_db();
+                                        $today = date('m');
+                                        $date1 = "";
+                                        $name = "";
+                                        $data = array();
+                                        $query = mysqli_query($database,"SELECT * FROM users WHERE MONTH(birthday_user) = '$today' ORDER BY birthday_user ASC;");
+                                        while($row = mysqli_fetch_assoc($query))
+                                        {
+                                            $data = array('Select'=>$row);
+                                            $json = json_encode($data);
+                                        $obj = json_decode($json,true);
+                                        foreach($obj as $id)
+                                        {
+                                        $id_person = $id['id_user'];
+                                        $name = $id['name_user'];
+                                        $second_name = $id['second_name_user'];
+                                        $date1 = $id['birthday_user'];
+                                        }
+                                
+                                        $date = preg_split('[-]', $date1);
+                                        
+                                        echo "<a href=\"users_dados.php?id_person=$id_person\" class=\"list-group-item\">
+                                        <i class=\"fa fa-bithday fa-fw\"></i>".$name." ".$second_name."<b><span class=\"pull-right text-muted small\"><em>$date[2]/$date[1]</em>
+                                        </span></b>
+                                        </a>";
+                                        }
+                                        
                                     ?>
-                                </a>
+                                
                                 
                             </div>
                             
@@ -263,6 +266,7 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
+    
 
 </body>
 
