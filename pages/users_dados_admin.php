@@ -133,10 +133,8 @@
                             </div>
                             <div class="input-group custom-search-form">
                             <span class="input-group-btn">
-                            <button style="margin-top:10px"type="button" class="btn btn-success">Adicionar</button>
-                            <button style="margin-top:10px"type="button" class="btn btn-danger">Remover</button>
-                            <button style="margin-top:10px"type="button" onClick="document.getElementById('id01').style.display='block'" class="btn btn-success">Editar</button>
-                                
+                            <button style="margin-top:10px" onClick="document.getElementById('id01').style.display='block'" type="button" class="btn btn-success">Adicionar</button>
+                               
                             </span>
                             
                             </div>
@@ -152,7 +150,6 @@
   <table class="table">
     <thead>
       <tr>
-        <th>Selecionado</th>
         <th>Nome</th>
         <th>Sobrenome</th>
         <th>Email</th>
@@ -161,6 +158,7 @@
         <th>Setor</th>
         <th>Ramal</th>
         <th>Permissão</th>
+        <th>Ações</th>
       </tr>
     </thead>
     <tbody>
@@ -185,7 +183,6 @@
     $permission = $id['name_permission'];
     }
       echo "<tr>
-        <td><input type=\"radio\" name=\"select\" value=\"$id_user\"></td>
         <td>$name</td>
         <td>$second_name</td>
         <td>$email</td>
@@ -194,6 +191,8 @@
         <td>$sector</td>
         <td>$ramal</td>
         <td>$permission</td>
+        <td><button type=\"button\" onClick=\"document.getElementById('id01').style.display='block'\" class=\"btn btn-success\">Editar</button>
+        <td><button type=\"button\" onClick=\"document.getElementById('id01').style.display='block'\" class=\"btn btn-danger\">Remover</button>               
       </tr>";
     }
       ?>
@@ -203,20 +202,21 @@
     </div>
 
     <!--MODAL-->
+    <div class="w3-container">
     <div id="id01" class="w3-modal w3-animate-opacity">
     <div class="w3-modal-content w3-card-4">
       <header class="w3-container w3-teal"> 
         <span onclick="document.getElementById('id01').style.display='none'" 
         class="w3-button w3-large w3-display-topright">&times;</span>
-        <h2>Editar - Usuário</h2>
+        <h2>Adicionar - Usuário</h2>
       </header>
       <div class="w3-container">
-               
-      Nome: <input type="text" name="nome" class="form-control" id="nome_cli">
-                    Sobrenome: <input type="text" name="cpf" class="form-control" id="cpf">
-                    Data de nascimento: <input type="text" name="date" class="form-control" id="tel">
-                    Email: <input type="text" name="email" class="form-control" id="cel">
-                    Função: <input type="text" name="email" class="form-control" id="email">
+      <form action="../php/user/insertUser.php" method="POST">
+      Nome: <input type="text" name="name" class="form-control" id="name">
+                    Sobrenome: <input type="text" name="second_name" class="form-control" id="second_name">
+                    Data de nascimento: <input type="date" name="date" class="form-control" id="date">
+                    Email: <input type="email" name="email" class="form-control" id="email">
+                    Função: <input type="text" name="function" class="form-control" id="function">
                     <br>
                     <div class="row">
                       <div class="col-md-6">
@@ -244,6 +244,8 @@
                       <br>
                       <br>
                       <div class="col-md-6">
+                      Telefone: <input type="tel" name="tel" class="form-control" id="tel">
+                      Ramal: <input type="number" name="ramal" class="form-control" id="ramal">
                       Permissão: <select name="permission_user">
                               <option value="1">Usuário</option>
                               <option value="2">Gestor/administrador</option>
@@ -252,7 +254,7 @@
                     </div>
                     <br>
                     
-  <button type="submit" class="btn btn-success" >SALVAR</button>
+  <button type="submit" class="btn btn-success">SALVAR</button>
   <br><br>
 </form>
 
@@ -264,6 +266,7 @@
       
       
     </div>
+  </div>
   </div>
            
 
