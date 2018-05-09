@@ -38,29 +38,6 @@
 <?php
 
     session_start();
-    
-        require_once("../connection/connection.php");
-        $database = connection_db();
-        $data = array();
-        $query = mysqli_query($database,"SELECT users.name_user,users.second_name_user,users.ramal_user,users.phone_user,users.birthday_user,users.function_user,sectors.name_sector,users.email_user 
-        FROM users INNER JOIN sectors ON sectors.id_sector = users.sector_user_id WHERE users.id_user = ".$_SESSION["id"].";");
-        while($row = mysqli_fetch_assoc($query))
-        {
-            $data = array('Select'=>$row);
-        }
-        $json = json_encode($data);
-        $obj = json_decode($json,true);
-        foreach($obj as $id)
-        {
-        $name = $id['name_user'];
-        $second_name = $id['second_name_user'];
-        $bd= $id['birthday_user'];
-        $function = $id['function_user'];
-        $sector = $id['name_sector'];
-        $phone = $id['phone_user'];
-        $email = $id['email_user'];
-        $ramal = $id['ramal_user'];
-        }
 
 ?>
 
@@ -141,10 +118,10 @@
                             <a href="index.php"><i class="fa fa-comments fa-fw"></i> Notificações</a>
                         </li>-->
                         <li>
-                            <a href="users.php" style="color:#243d5b"><i class="fa fa-user fa-fw" style="color:#243d5b"></i> Minha conta</a>
+                            <a href="users.php"><i class="fa fa-user fa-fw"></i>Minha conta</a>
                         </li>
                         <li>
-                            <a href="resetPassword.php"><i class="fa fa-lock fa-fw"></i> Alterar senha</a>
+                            <a href="resetPassword.php" style="color:#243d5b"><i class="fa fa-lock fa-fw" style="color:#243d5b"></i> Alterar senha</a>
                         </li>
                     </ul>
                 </div>
@@ -153,43 +130,20 @@
     </nav>
     
     <!-- /.navbar-top-links -->
-    <h1 class="page-header" style="margin-left:270px;"> Minha conta</h1>
-    <form class="col-md-9">
-    <?php
-  echo "<div class=\"form-group\">
-    <label for=\"exampleInputEmail1\" style=\"margin-left:270px;\">Email</label>
-    <input type=\"email\" class=\"form-control\" value=\"$email\" disabled=\"disabled\" id=\"exampleInputEmail1\" style=\"margin-left:270px; margin-right:500px;\" aria-describedby=\"emailHelp\" placeholder=\"Email\">
+    <h1 class="page-header" style="margin-left:270px;"> Alterar Senha</h1>
+    <form action="../php/user/resetPassword.php" class="col-md-4" method="POST">
+    
+  <div class="form-group">
+    <label for="exampleInputPassword1" style="margin-left:270px;">Senha</label>
+    <input type="password" name="password" class="form-control"  id="exampleInputPassword1" style="margin-left:270px; margin-right:500px;" aria-describedby="passwordHelp" placeholder="Senha">
   </div>
-  <div class=\"form-group\">
-    <label for=\"exampleInputEmail1\" style=\"margin-left:270px;\">Nome</label>
-    <input type=\"text\" class=\"form-control\" value=\"$name\" id=\"exampleInputEmail1\" style=\"margin-left:270px;\" aria-describedby=\"emailHelp\" placeholder=\"Nome\">
+  <div class="form-group\">
+    <label for="exampleInputPassword1" style="margin-left:270px;">Senha novamente</label>
+    <input type="password" name="passwordAgain" class="form-control"  id="exampleInputPassword1" style="margin-left:270px;" aria-describedby="emailpasswordHelpHelp" placeholder="Senha novamente">
   </div>
-  <div class=\"form-group\">
-    <label for=\"exampleInputEmail1\" style=\"margin-left:270px;\">Sobrenome</label>
-    <input type=\"text\" class=\"form-control\" value=\"$second_name\" id=\"exampleInputEmail1\" style=\"margin-left:270px;\" aria-describedby=\"emailHelp\" placeholder=\"Sobrenome\">
-  </div>
-  <div class=\"form-group\">
-    <label for=\"exampleInputEmail1\" style=\"margin-left:270px;\">Data de nascimento</label>
-    <input type=\"date\" class=\"form-control\" id=\"exampleInputEmail1\" value=\"$bd\" style=\"margin-left:270px;width:100%\" aria-describedby=\"emailHelp\" placeholder=\"Data de nascimento\">
-  </div>
-  <div class=\"form-group\">
-    <label for=\"exampleInputEmail1\" style=\"margin-left:270px;\">Telefone</label>
-    <input type=\"tel\" class=\"form-control\" id=\"exampleInputEmail1\" value=\"$phone\" style=\"margin-left:270px;\" aria-describedby=\"emailHelp\" placeholder=\"Telefone\">
-  </div>
-  <div class=\"form-group\">
-    <label for=\"exampleInputEmail1\" style=\"margin-left:270px;\">Ramal</label>
-    <input type=\"ext\" class=\"form-control\" id=\"exampleInputEmail1\" value=\"$ramal\" style=\"margin-left:270px;\" aria-describedby=\"emailHelp\" placeholder=\"Ramal\">
-  </div>
-  <div class=\"form-group\">
-    <label for=\"exampleInputEmail1\" style=\"margin-left:270px;\">Função</label>
-    <input type=\"text\" class=\"form-control\" id=\"exampleInputEmail1\" disabled=\"disabled\" value=\"$function\" style=\"margin-left:270px;\" aria-describedby=\"emailHelp\" placeholder=\"Função\">
-  </div>
-  <div class=\"form-group\">
-    <label for=\"exampleInputEmail1\" style=\"margin-left:270px;\">Setor</label>
-    <input type=\"text\" class=\"form-control\" id=\"exampleInputEmail1\"  disabled=\"disabled\" value=\"$sector\" style=\"margin-left:270px;\" aria-describedby=\"emailHelp\" placeholder=\"Setor\">
-  </div>
-  <button type=\"button\" style=\"margin-left:270px;\" class=\"btn btn-success\">Editar</button>";
-  ?>
+  <br>
+  <button type="submit" style="margin-left:270px;" class="btn btn-success">Salvar</button>
+
 </form>
     <!-- /#wrapper -->
 
