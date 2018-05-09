@@ -17,6 +17,8 @@
     <!-- MetisMenu CSS -->
     <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="../css/style_modal.css">
+
     <!-- Custom CSS -->
     <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
 
@@ -46,14 +48,65 @@
 
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 50; background-color:#243d5b">
-        <div class="container">    
-        <div class="navbar-header">
+       
+    
+        
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+                <script>
+                function seeMenu(dish1,dish2,dish3,garrison1,garrison2,option,salad,dessert)
+                {
+
+                    document.getElementById('dish1').value=dish1;
+                    document.getElementById('dish2').value=dish2;
+                    document.getElementById('dish3').value=dish3;
+                    document.getElementById('garrison1').value=garrison1;
+                    document.getElementById('garrison2').value=garrison2;
+                    document.getElementById('option').value=option;
+                    document.getElementById('salad').value=salad;
+                    document.getElementById('dessert').value=dessert;
+                    $('#Menu').modal();
+                    
+
+                }
+            </script>
+        <div class="container">    
+        <div class="navbar-header">
+       
+        <div id="Menu" class="w3-modal w3-animate-opacity" >
+        <div class="w3-modal-content w3-card-4">
+        <header class="w3-container w3-teal"> 
+        <span onclick="document.getElementById('Menu').style.display='none'" 
+        class="w3-button w3-large w3-display-topright">&times;</span>
+        <h2>Cardápio</h2>
+        </header>
+        <div class="w3-container">
+        
+                    <br>
+                    Prato 1: <input type="text" name="name" class="form-control" disabled="disabled" id="dish1">
+                    Prato 2: <input type="text" name="second_name" class="form-control" disabled="disabled" id="dish2">
+                    Prato 3: <input type="text" name="date" class="form-control" disabled="disabled" id="dish3">
+                    Guarnição 1: <input type="text" name="email" class="form-control" disabled="disabled" id="garrison1">
+                    Guarnição 2: <input type="text" name="function" class="form-control" disabled="disabled" id="garrison2">
+                    Opção: <input type="text" name="function" class="form-control" disabled="disabled" id="option">
+                    Saladas: <input type="text" name="function" class="form-control" disabled="disabled" id="salad">
+                    Sobremesas: <input type="text" name="function" class="form-control" disabled="disabled" id="dessert">
+                    <br>   
+
+        </div>
+         <footer class="w3-container w3-teal">
+        <br>
+         <br>
+        </footer>
+      
+      
+        </div>
+        </div>
+        
             </div>
     </div>
             <!-- /.navbar-header -->
@@ -75,7 +128,7 @@
                             <li class=\"divider\"></li>
                             <li><a href=\"../php/login/finalizeLogin.php\"><i class=\"fa fa-table fa-fw\"></i> Eventos</a></li>
                             <li class=\"divider\"></li>
-                            <li><a href=\"../php/login/finalizeLogin.php\"><i class=\"fa fa-comments fa-fw\"></i> Notificações</a></li>
+                            <li><a href=\"../php/login/finalizeLogin.php\"><i class=\"fa fa-comments fa-fw\"></i> Recados</a></li>
                             <li class=\"divider\"></li>
                             <li><a href=\"../php/login/finalizeLogin.php\"><i class=\"fa fa-phone fa-fw\"></i> Ramais</a></li>
                             <li class=\"divider\"></li>
@@ -120,10 +173,10 @@
                         </li>-->
                        
                         <li>
-                            <a href="events.php"><i class="fa fa-dashboard fa-fw"></i> Painel</a>
+                            <a href="index.php" style="color:#243d5b"   ><i class="fa fa-dashboard fa-fw" style="color:#243d5b"></i> Painel</a>
                         </li>
                         <li>
-                            <a href="events.php"><i class="fa fa-comments fa-fw"></i> Notificações</a>
+                            <a href="full_users.php"><i class="fa fa-users fa-fw"></i> Usuários</a>
                         </li>
                         <li>
                             <a href="events.php"><i class="fa fa-table fa-fw"></i> Eventos</a>
@@ -234,7 +287,7 @@
                                         $date1 = "";
                                         $name = "";
                                         $data = array();
-                                        $query = mysqli_query($database,"SELECT * FROM users WHERE MONTH(birthday_user) = '$today' ORDER BY birthday_user ASC;");
+                                        $query = mysqli_query($database,"SELECT * FROM users WHERE MONTH(birthday_user) = '$today' ORDER BY DAY(birthday_user) ASC;");
                                         while($row = mysqli_fetch_assoc($query))
                                         {
                                             $data = array('Select'=>$row);
@@ -271,6 +324,98 @@
 
                 <!-- /.col-lg-4 -->
             </div>
+            <div class="col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                        <i class="fa fa-cutlery fa-fw"></i> Cardápio da semana
+                        </div>
+                        <!-- /.panel-heading -->
+
+                        <div class="panel-body">
+                            <div class="list-group">
+                                
+                                    <?php   
+                                        require_once("../connection/connection.php");
+                                        require_once("../php/menu/actions_menu.php");
+                                       
+                                        $database = connection_db();
+                                        $query = mysqli_query($database,"SELECT * FROM menu ORDER BY DAY(date_menu) ASC;");
+                                        while($row = mysqli_fetch_assoc($query))
+                                        {
+                                            $actions = new Actions();
+                                            $data = array('Select'=>$row);
+                                            $json = json_encode($data);
+                                        $obj = json_decode($json,true);
+                                        foreach($obj as $id)
+                                        {
+                                            $seeMenu = $actions->see($id);
+                                            $date_menu = $id['date_menu']; 
+                                        }
+                                       
+                                        $date = preg_split('[-]', $date_menu);
+                                        
+                                        echo "
+                                        <a onClick=\"$seeMenu\" class=\"list-group-item\">
+                                        <i class=\"fa fa-bithday fa-fw\"></i>Cardápio do dia:$date[2]/$date[1]<b></b>
+                                        </a>";
+                                        }
+                                        
+                                    ?>
+                                
+                                
+                            </div>
+                            
+                        </div>
+                        
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                <!-- /.col-lg-4 -->
+            </div>
+
+        <div class="col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                        <i class="fa fa-comments fa-fw"></i> Mural de recados
+                        </div>
+                        <!-- /.panel-heading -->
+
+                        <div class="panel-body">
+                            <div class="list-group">
+                                
+                                    <?php
+                                        require_once("../connection/connection.php");                                        
+                                        $database = connection_db();
+                                        $data = array();
+                                        $query = mysqli_query($database,"SELECT * FROM messages ORDER BY date_message DESC;");
+                                        while($row = mysqli_fetch_assoc($query))
+                                        {
+                                            $data = array('Select'=>$row);
+                                            $json = json_encode($data);
+                                        $obj = json_decode($json,true);
+                                        foreach($obj as $id)
+                                        {
+                                        $id_message = $id['id_message'];
+                                        $title = $id['title_message'];
+                                        $text = $id['text_message'];
+                                        }
+                                
+                                        $date = preg_split('[-]', $date1);
+                                        echo "<a class=\"list-group-item\">
+                                        <i class=\"fa fa-bithday fa-fw\"></i>".$title."</a>";
+                                        
+                                        }
+                                        
+                                    ?>
+                                
+                                
+                            </div>
+                            
+                        </div>
+                        
+                        <!-- /.panel-body -->
+                    </div>  
+
             <!-- /.row -->
         </div>
         <!-- /#page-wrapper -->

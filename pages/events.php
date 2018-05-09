@@ -116,7 +116,7 @@ box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
                         {
                             echo "<li class=\"dropdown\">
                             <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">
-                            <i class=\"fa fa-gear fa-fw\" ></i> <i class=\"fa fa-caret-down\"></i>
+                            <i class=\"fa fa-gear    fa-fw\" ></i> <i class=\"fa fa-caret-down\"></i>
                         </a>
                         <ul class=\"dropdown-menu dropdown-user\" style=\"font-color:#fff\">
                             <li><a href=\"users.php\"><i class=\"fa fa-clock-o fa-fw\"></i> Atualizações</a>
@@ -126,7 +126,7 @@ box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
                             <li class=\"divider\"></li>
                             <li><a href=\"../php/login/finalizeLogin.php\"><i class=\"fa fa-table fa-fw\"></i> Eventos</a></li>
                             <li class=\"divider\"></li>
-                            <li><a href=\"../php/login/finalizeLogin.php\"><i class=\"fa fa-comments fa-fw\"></i> Notificações</a></li>
+                            <li><a href=\"../php/login/finalizeLogin.php\"><i class=\"fa fa-comments fa-fw\"></i> Recados</a></li>
                             <li class=\"divider\"></li>
                             <li><a href=\"../php/login/finalizeLogin.php\"><i class=\"fa fa-phone fa-fw\"></i> Ramais</a></li>
                             <li class=\"divider\"></li>
