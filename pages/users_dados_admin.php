@@ -17,6 +17,8 @@
     <!-- MetisMenu CSS -->
     <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="../css/style_modal.css">
+
     <!-- Custom CSS -->
     <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
 
@@ -42,7 +44,7 @@
         require_once("../connection/connection.php");
         $database = connection_db();
         $data = array();
-        $query = mysqli_query($database,"SELECT users.name_user,users.second_name_user,users.birthday_user,users.function_user,
+        $query = mysqli_query($database,"SELECT users.id_user,users.name_user,users.second_name_user,users.birthday_user,users.function_user,
         sectors.name_sector,users.email_user,users.phone_user,users.ramal_user,permissions.name_permission FROM users 
         INNER JOIN sectors ON sectors.id_sector = users.sector_user_id INNER JOIN permissions ON 
         permissions.id_permission = users.permission_user ORDER BY users.name_user ASC;");
@@ -72,13 +74,13 @@
                         {
                             echo "<li class=\"dropdown\">
                             <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">
-                            <i class=\"fa fa-gear fa-fw\" ></i> <i class=\"fa fa-caret-down\"></i>
+                            <i class=\"fa fa-gear fa-fw\" style=\"color:#fff\"></i> <i class=\"fa fa-caret-down\" style=\"color:#fff\"></i>
                         </a>
                         <ul class=\"dropdown-menu dropdown-user\" style=\"font-color:#fff\">
                             <li><a href=\"users.php\"><i class=\"fa fa-clock-o fa-fw\"></i> Atualizações</a>
                             </li>
                             <li class=\"divider\"></li>
-                            <li><a href=\"users_dados_admin.php\"><i class=\"fa fa-users fa-fw\"></i> Usuários</a></li>
+                            <li><a href=\"users_dados_admin.php\"><i class=\"fa fa-users fa-fw\" ></i> Usuários</a></li>
                             <li class=\"divider\"></li>
                             <li><a href=\"../php/login/finalizeLogin.php\"><i class=\"fa fa-table fa-fw\"></i> Eventos</a></li>
                             <li class=\"divider\"></li>
@@ -95,14 +97,14 @@
 
                     ?>
         <li class="dropdown">
-    <li><a href="index.php"><i class="fa fa-sign-out fa-fw"></i> Voltar</a>
+    <li><a href="index.php" style="color:#fff"><i class="fa fa-sign-out fa-fw" style="color:#fff"></i> Voltar</a>
                 </li>
                 </li>
             </ul>
     <ul class="nav navbar-top-links navbar-right" style="background-color:#243d5b">
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fa fa-user fa-fw" ></i> <i class="fa fa-caret-down"></i>
+                <i class="fa fa-user fa-fw" style="color:#fff" ></i> <i class="fa fa-caret-down" style="color:#fff"></i>
             </a>
             <ul class="dropdown-menu dropdown-user" style="font-color:#fff">
                 <li><a href="../php/login/finalizeLogin.php"><i class="fa fa-sign-out fa-fw"></i> Sair
@@ -113,13 +115,12 @@
         </li>
         <!-- /.dropdown -->
     </ul>
-    <div class="navbar-default sidebar" role="navigation">
-
-        
-
-    <img src="../img/img_grupoamb.jpg" style="margin-left:30px">
-    <br><br>
+    <div class="navbar-default sidebar" role="navigation">  
+    <div class="sidebar-nav navbar-collapse">  
     <ul class="nav" id="side-menu">
+    <br>
+        <img src="../img/img_grupoamb2.jpg" style="margin-left:30px">    
+        <br><br>
     <li class="col-md-12" style="margin-left:25px">
                             <div class="input-group custom-search-form">
                                 <input type="text" class="form-control" placeholder="Pesquisar...">
@@ -134,7 +135,7 @@
                             <span class="input-group-btn">
                             <button style="margin-top:10px"type="button" class="btn btn-success">Adicionar</button>
                             <button style="margin-top:10px"type="button" class="btn btn-danger">Remover</button>
-                            <button style="margin-top:10px"type="button" class="btn btn-success">Editar</button>
+                            <button style="margin-top:10px"type="button" onClick="document.getElementById('id01').style.display='block'" class="btn btn-success">Editar</button>
                                 
                             </span>
                             
@@ -144,12 +145,14 @@
                         </li>
                         <br><br>
     </ul>
+                        </div>
     <br>
 <div class="container float-right">
 <div class="col-lg-12">            
   <table class="table">
     <thead>
       <tr>
+        <th>Selecionado</th>
         <th>Nome</th>
         <th>Sobrenome</th>
         <th>Email</th>
@@ -170,6 +173,7 @@
     $obj = json_decode($json,true);
     foreach($obj as $id)
     {
+    $id_user = $id['id_user'];
     $name = $id['name_user'];
     $second_name = $id['second_name_user'];
     $bd= $id['birthday_user'];
@@ -181,6 +185,7 @@
     $permission = $id['name_permission'];
     }
       echo "<tr>
+        <td><input type=\"radio\" name=\"select\" value=\"$id_user\"></td>
         <td>$name</td>
         <td>$second_name</td>
         <td>$email</td>
@@ -196,6 +201,74 @@
   </table>
 </div>
     </div>
+
+    <!--MODAL-->
+    <div id="id01" class="w3-modal w3-animate-opacity">
+    <div class="w3-modal-content w3-card-4">
+      <header class="w3-container w3-teal"> 
+        <span onclick="document.getElementById('id01').style.display='none'" 
+        class="w3-button w3-large w3-display-topright">&times;</span>
+        <h2>Editar - Usuário</h2>
+      </header>
+      <div class="w3-container">
+               
+      Nome: <input type="text" name="nome" class="form-control" id="nome_cli">
+                    Sobrenome: <input type="text" name="cpf" class="form-control" id="cpf">
+                    Data de nascimento: <input type="text" name="date" class="form-control" id="tel">
+                    Email: <input type="text" name="email" class="form-control" id="cel">
+                    Função: <input type="text" name="email" class="form-control" id="email">
+                    <br>
+                    <div class="row">
+                      <div class="col-md-6">
+
+                    Setor: <select name="sector">
+                        <?php
+                            
+                            $query2 = mysqli_query($database,"SELECT * FROM sectors ORDER BY name_sector ASC;");
+                            while($row = mysqli_fetch_assoc($query2))
+                            {
+                             $data = array('Select'=>$row);
+
+                            $json = json_encode($data);
+                            $obj = json_decode($json,true);
+                        foreach($obj as $id2)
+                        {
+                        $sectors = $id2['name_sector'];
+                        $id_sector= $id2['id_sector'];
+                        }
+                        echo "<option value=\"$id_sector\">$sectors</option>";
+                        }
+                        ?>
+                    </select>
+                      </div>
+                      <br>
+                      <br>
+                      <div class="col-md-6">
+                      Permissão: <select name="permission_user">
+                              <option value="1">Usuário</option>
+                              <option value="2">Gestor/administrador</option>
+                    </select>
+                      </div>
+                    </div>
+                    <br>
+                    
+  <button type="submit" class="btn btn-success" >SALVAR</button>
+  <br><br>
+</form>
+
+      </div>
+      <footer class="w3-container w3-teal">
+       <br>
+       <br>
+      </footer>
+      
+      
+    </div>
+  </div>
+           
+
+<!-->
+
     </nav>
     
     <!-- /.navbar-top-links -->
