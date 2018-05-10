@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php           session_start();         if(@$_SESSION['id'] == null)         {             echo "<body onLoad=\"window.location='login.php'\">";         }         else{                                  }         ?> <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -39,10 +39,7 @@
 
 <body style="background-color:#fff">
 
-    <?php
-
-        session_start();
-    ?>
+ 
 
     <div id="wrapper">
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php           session_start();         if(@$_SESSION['id'] == null)         {             echo "<body onLoad=\"window.location='login.php'\">";         }         else{                                  }         ?> <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -37,7 +37,7 @@
 
 <?php
 
-    session_start();
+    
     
         require_once("../connection/connection.php");
         $database = connection_db();
@@ -131,7 +131,7 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <br>
-                            <img src="../img/img_grupoamb2.jpg">
+                            <img src="../img/img_grupoamb2.jpg" onClick="window.location.href='index.php'">
                         <br><br>
                         <!--<li>
                             <a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Painel</a>

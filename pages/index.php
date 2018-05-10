@@ -1,3 +1,15 @@
+<?php 
+
+        session_start();
+        if(@$_SESSION['id'] == null)
+        {
+            echo "<body onLoad=\"window.location='login.php'\">";
+        }
+        else{
+            
+           
+        }
+        ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,11 +51,7 @@
 
 <body style="background-color:#fff">
 
-    <?php
-
-        session_start();
-    ?>
-
+   
     <div id="wrapper">
 
         <!-- Navigation -->
@@ -121,7 +129,7 @@
                             <i class=\"fa fa-gear fa-fw\" ></i> <i class=\"fa fa-caret-down\"></i>
                         </a>
                         <ul class=\"dropdown-menu dropdown-user\" style=\"font-color:#fff\">
-                            <li><a href=\"users.php\"><i class=\"fa fa-clock-o fa-fw\"></i> Atualizações</a>
+                            <li><a href=\"notification_admin.php\"><i class=\"fa fa-clock-o fa-fw\"></i> Atualizações</a>
                             </li>
                             <li class=\"divider\"></li>
                             <li><a href=\"users_dados_admin.php\"><i class=\"fa fa-users fa-fw\"></i> Usuários</a></li>
@@ -132,7 +140,7 @@
                             <li class=\"divider\"></li>
                             <li><a href=\"../php/login/finalizeLogin.php\"><i class=\"fa fa-phone fa-fw\"></i> Ramais</a></li>
                             <li class=\"divider\"></li>
-                            <li><a href=\"../php/login/finalizeLogin.php\"><i class=\"glyphicon glyphicon-cutlery\"></i> Cardápio</a></li>
+                            <li><a href=\"menu_admin.php\"><i class=\"glyphicon glyphicon-cutlery\"></i> Cardápio</a></li>
                         </ul>
                     <!-- /.dropdown-user -->
                 </li>";
@@ -162,7 +170,7 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <br>
-                            <img src="../img/img_grupoamb2.jpg">
+                            <img src="../img/img_grupoamb2.jpg" onClick="window.location.href='index.php'">
                         <br><br>
                         <!--<li>
                             <a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Painel</a>
@@ -183,6 +191,9 @@
                         </li>
                         <li>
                             <a href="mural_notification.php"><i class="fa fa-comments fa-fw"></i> Mural de recados</a>
+                        </li>
+                        <li>
+                            <a href="extensions.php"><i class="fa fa-phone fa-fw"></i> Ramais</a>
                         </li>
                     </ul>
                 </div>

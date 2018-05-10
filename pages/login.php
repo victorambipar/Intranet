@@ -1,3 +1,15 @@
+<?php 
+
+        session_start();
+        if(@@$_SESSION['id'] == null)
+        {
+            
+        }
+        else{
+            
+            echo "<body onLoad=\"window.location='index.php'\">";
+        }
+        ?>
 <!DOCTYPE html>
 <html lang="en">
 

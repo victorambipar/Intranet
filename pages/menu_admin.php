@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php           session_start();         if(@$_SESSION['id'] == null)         {             echo "<body onLoad=\"window.location='login.php'\">";         }         else{                                  }         ?> <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -40,14 +40,11 @@
 <?php
 
         
-        session_start();
+        
         require_once("../connection/connection.php");
         $database = connection_db();
         $data = array();
-        $query = mysqli_query($database,"SELECT users.id_user,users.name_user,users.second_name_user,users.birthday_user,users.function_user,
-        sectors.name_sector,users.email_user,users.phone_user,users.ramal_user,permissions.name_permission FROM users 
-        INNER JOIN sectors ON sectors.id_sector = users.sector_user_id INNER JOIN permissions ON 
-        permissions.id_permission = users.permission_user ORDER BY users.name_user ASC;");
+        $query = mysqli_query($database,"SELECT * FROM menu ORDER BY date_menu ASC;");
         
 
 ?>
@@ -74,7 +71,7 @@
                         {
                             echo "<li class=\"dropdown\">
                             <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\">
-                            <i class=\"fa fa-gear fa-fw\" style=\"color:#fff\"></i> <i class=\"fa fa-caret-down\" style=\"color:#fff\"></i>
+                            <i class=\"fa fa-gear fa-fw\"></i> <i class=\"fa fa-caret-down\"></i>
                         </a>
                         <ul class=\"dropdown-menu dropdown-user\" style=\"font-color:#fff\">
                             <li><a href=\"users.php\"><i class=\"fa fa-clock-o fa-fw\"></i> Atualizações</a>
@@ -97,16 +94,16 @@
 
                     ?>
         <li class="dropdown">
-    <li><a href="index.php" style="color:#fff"><i class="fa fa-sign-out fa-fw" style="color:#fff"></i> Voltar</a>
+    <li><a href="index.php"><i class="fa fa-sign-out fa-fw"></i> Voltar</a>
                 </li>
                 </li>
             </ul>
     <ul class="nav navbar-top-links navbar-right" style="background-color:#243d5b">
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fa fa-user fa-fw" style="color:#fff" ></i> <i class="fa fa-caret-down" style="color:#fff"></i>
+                <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down" ></i>
             </a>
-            <ul class="dropdown-menu dropdown-user" style="font-color:#fff">
+            <ul class="dropdown-menu dropdown-user>
                 <li><a href="../php/login/finalizeLogin.php"><i class="fa fa-sign-out fa-fw"></i> Sair
             </a>
                 </li>
@@ -154,10 +151,11 @@
         <th>Prato 1</th>
         <th>Prato 2</th>
         <th>Prato 3</th>
-        <th>Função</th>
-        <th>Setor</th>
-        <th>Ramal</th>
-        <th>Permissão</th>
+        <th>Guarnição 1</th>
+        <th>Guarnição 2</th>
+        <th>Opção</th>
+        <th>Salada</th>
+        <th>Sobremesas</th>
         <th>Ações</th>
       </tr>
     </thead>
@@ -171,26 +169,28 @@
     $obj = json_decode($json,true);
     foreach($obj as $id)
     {
-    $id_user = $id['id_user'];
-    $name = $id['name_user'];
-    $second_name = $id['second_name_user'];
-    $bd= $id['birthday_user'];
-    $function = $id['function_user'];
-    $phone = $id['phone_user'];
-    $email = $id['email_user'];
-    $ramal = $id['ramal_user'];
-    $sector = $id['name_sector'];
-    $permission = $id['name_permission'];
+    $id_menu = $id['id_menu'];
+    $date = $id['date_menu'];
+    $dish1 = $id['dish1_menu'];
+    $dish2 = $id['dish2_menu'];
+    $dish3 = $id['dish3_menu'];
+    $garrison1 = $id['garrison1_menu'];
+    $garrison2 = $id['garrison2_menu'];
+    $option = $id['option_menu'];
+    $salad = $id['salad_menu'];
+    $dessert = $id['dessert_menu'];
+  
     }
       echo "<tr>
-        <td>$name</td>
-        <td>$second_name</td>
-        <td>$email</td>
-        <td>$bd</td>
-        <td>$function</td>
-        <td>$sector</td>
-        <td>$ramal</td>
-        <td>$permission</td>
+        <td>$date</td>
+        <td>$dish1</td>
+        <td>$dish2</td>
+        <td>$dish3</td>
+        <td>$garrison1</td>
+        <td>$garrison2</td>
+        <td>$option</td>
+        <td>$salad</td>
+        <td>$dessert</td>
         <td><button type=\"button\" onClick=\"document.getElementById('id01').style.display='block'\" class=\"btn btn-success\">Editar</button>
         <td><button type=\"button\" onClick=\"document.getElementById('id01').style.display='block'\" class=\"btn btn-danger\">Remover</button>               
       </tr>";
@@ -208,50 +208,21 @@
       <header class="w3-container w3-teal"> 
         <span onclick="document.getElementById('id01').style.display='none'" 
         class="w3-button w3-large w3-display-topright">&times;</span>
-        <h2>Adicionar - Usuário</h2>
+        <h2>Adicionar - Cardápio</h2>
       </header>
       <div class="w3-container">
-      <form action="../php/user/insertUser.php" method="POST">
-      Nome: <input type="text" name="name" class="form-control" id="name">
-                    Sobrenome: <input type="text" name="second_name" class="form-control" id="second_name">
-                    Data de nascimento: <input type="date" name="date" class="form-control" id="date">
-                    Email: <input type="email" name="email" class="form-control" id="email">
-                    Função: <input type="text" name="function" class="form-control" id="function">
+      <form action="../php/menu/insertMenu.php" method="POST">
+      <br>
+      Data: <input type="date" name="date" class="form-control" id="date">
+                    Prato 1: <input type="text" name="dish1" class="form-control" id="dish1">
+                    Prato 2: <input type="text" name="dish2" class="form-control" id="dish2">
+                    Prato 3: <input type="text" name="dish3" class="form-control" id="dish3">
+                    Guarnição 1: <input type="text" name="garrison1" class="form-control" id="garrison1">
+                    Guarnição 2: <input type="text" name="garrison2" class="form-control" id="garrison2">
+                    Opção: <input type="text" name="option" class="form-control" id="option">
+                    Salada: <input type="text" name="salad" class="form-control" id="salad">
+                    Sobremesas: <input type="text" name="dessert" class="form-control" id="dessert">
                     <br>
-                    <div class="row">
-                      <div class="col-md-6">
-
-                    Setor: <select name="sector">
-                        <?php
-                            
-                            $query2 = mysqli_query($database,"SELECT * FROM sectors ORDER BY name_sector ASC;");
-                            while($row = mysqli_fetch_assoc($query2))
-                            {
-                             $data = array('Select'=>$row);
-
-                            $json = json_encode($data);
-                            $obj = json_decode($json,true);
-                        foreach($obj as $id2)
-                        {
-                        $sectors = $id2['name_sector'];
-                        $id_sector= $id2['id_sector'];
-                        }
-                        echo "<option value=\"$id_sector\">$sectors</option>";
-                        }
-                        ?>
-                    </select>
-                      </div>
-                      <br>
-                      <br>
-                      <div class="col-md-6">
-                      Telefone: <input type="tel" name="tel" class="form-control" id="tel">
-                      Ramal: <input type="number" name="ramal" class="form-control" id="ramal">
-                      Permissão: <select name="permission_user">
-                              <option value="1">Usuário</option>
-                              <option value="2">Gestor/administrador</option>
-                    </select>
-                      </div>
-                    </div>
                     <br>
                     
   <button type="submit" class="btn btn-success">SALVAR</button>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php           session_start();         if(@$_SESSION['id'] == null)         {             echo "<body onLoad=\"window.location='login.php'\">";         }         else{                                  }         ?> <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -37,7 +37,7 @@
 
 <?php
 
-    session_start();
+    
         $person_birthday = $_GET['id_person'];
         require_once("../connection/connection.php");
         $database = connection_db();

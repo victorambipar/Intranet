@@ -1,3 +1,15 @@
+<?php 
+
+        session_start();
+        if(@$_SESSION['id'] == null)
+        {
+            echo "<body onLoad=\"window.location='login.php'\">";
+        }
+        else{
+            
+           
+        }
+        ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,11 +51,7 @@
 
 <body style="background-color:#fff">
 
-    <?php
-
-        session_start();
-    ?>
-
+   
     <div id="wrapper">
 
         <!-- Navigation -->
@@ -110,7 +118,7 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <br>
-                            <img src="../img/img_grupoamb2.jpg">
+                            <img src="../img/img_grupoamb2.jpg" onClick="window.location.href='index.php'">
                         <br><br>
                         <!--<li>
                             <a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Painel</a>
@@ -121,13 +129,19 @@
                         </li>-->
                        
                         <li>
-                            <a href="index.php" ><i class="fa fa-dashboard fa-fw"></i> Painel</a>
+                            <a href="index.php"    ><i class="fa fa-dashboard fa-fw"></i> Painel</a>
                         </li>
                         <li>
-                            <a href="full_users.php" style="color:#243d5b"><i class="fa fa-users fa-fw"  style="color:#243d5b"></i> Usuários</a>
+                            <a href="full_users.php" style="color:#243d5b"><i class="fa fa-users fa-fw" style="color:#243d5b"></i> Usuários</a>
                         </li>
                         <li>
                             <a href="events.php"><i class="fa fa-table fa-fw"></i> Eventos</a>
+                        </li>
+                        <li>
+                            <a href="mural_notification.php"><i class="fa fa-comments fa-fw"></i> Mural de recados</a>
+                        </li>
+                        <li>
+                            <a href="extensions.php" ><i class="fa fa-phone fa-fw"></i> Ramais</a>
                         </li>
                     </ul>
                 </div>

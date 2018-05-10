@@ -39,6 +39,8 @@
 
 <body style="background-color:#fff">
 
+ 
+
     <div id="wrapper">
 
         <!-- Navigation -->
@@ -46,12 +48,6 @@
        
     
         
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right" style="background-color:#243d5b">
@@ -105,33 +101,9 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <br>
-                            <img src="../img/img_grupoamb2.jpg" onClick="window.location.href='index.php'">
+                            <img src="../img/img_grupoamb2.jpg" onClick="window.location.href='index.php'" >
                         <br><br>
-                        <!--<li>
-                            <a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Painel</a>
-                        </li>
-                        
-                        <li>
-                            <a href="index.php"><i class="fa fa-comments fa-fw"></i> Notificações</a>
-                        </li>-->
-                       
-                        
-                        <li>
-                            <a href="index.php"    ><i class="fa fa-dashboard fa-fw"></i> Painel</a>
-                        </li>
-                        <li>
-                            <a href="full_users.php"><i class="fa fa-users fa-fw" ></i> Usuários</a>
-                        </li>
-                        <li>
-                            <a href="events.php"><i class="fa fa-table fa-fw"></i> Eventos</a>
-                        </li>
-                        <li>
-                            <a href="mural_notification.php" style="color:#243d5b"><i class="fa fa-comments fa-fw" style="color:#243d5b"></i> Mural de recados</a>
-                        </li>
-                        <li>
-                            <a href="extensions.php" ><i class="fa fa-phone fa-fw"></i> Ramais</a>
-                        </li>
-                    </ul>
+                      
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>
@@ -143,7 +115,7 @@
                 <div class="col-lg-12">
                   
         <ul class="nav" id="side-menu" style="margin-right:30px">
-                    <h1 class="page-header">Mural de recados</h1>
+                    <h1 class="page-header">Notificações <button class="btn btn-success">Adicionar</button></h1>
                     
                         
     </ul>
@@ -152,7 +124,7 @@
         <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                        <i class="fa fa-comments fa-fw"></i> Mural de recados
+                        <i class="fa fa-clock-o fa-fw"></i>
                         </div>
                         <!-- /.panel-heading -->
 
@@ -163,7 +135,7 @@
                                         require_once("../connection/connection.php");                                        
                                         $database = connection_db();
                                         $data = array();
-                                        $query = mysqli_query($database,"SELECT * FROM messages ORDER BY date_message DESC;");
+                                        $query = mysqli_query($database,"SELECT * FROM notifications ORDER BY date_notification DESC;");
                                         while($row = mysqli_fetch_assoc($query))
                                         {
                                             $data = array('Select'=>$row);
@@ -171,13 +143,14 @@
                                         $obj = json_decode($json,true);
                                         foreach($obj as $id)
                                         {
-                                        $id_message = $id['id_message'];
-                                        $title = $id['title_message'];
-                                        $text = $id['text_message'];
+                                        $id_not = $id['id_notification'];
+                                        $text = $id['text_notification'];
+                                        $title = $id['title_notification'];
                                         }
                                         echo "<a class=\"list-group-item\">
                                         <b>$title:  </b>
-                                        $text</a>";
+                                        $text<br><br><button class=\"btn btn-danger\">Remover</button>
+                                        <button class=\"btn btn-success\">Editar</button></a>";
                                         
                                         }
                                         
