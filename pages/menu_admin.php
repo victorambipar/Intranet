@@ -150,10 +150,10 @@
   <table class="table">
     <thead>
       <tr>
-        <th>Nome</th>
-        <th>Sobrenome</th>
-        <th>Email</th>
-        <th>Data de nascimento</th>
+        <th>Data</th>
+        <th>Prato 1</th>
+        <th>Prato 2</th>
+        <th>Prato 3</th>
         <th>Função</th>
         <th>Setor</th>
         <th>Ramal</th>

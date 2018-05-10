@@ -124,10 +124,13 @@
                             <a href="index.php" ><i class="fa fa-dashboard fa-fw"></i> Painel</a>
                         </li>
                         <li>
-                            <a href="full_users.php" style="color:#243d5b"><i class="fa fa-users fa-fw"  style="color:#243d5b"></i> Usuários</a>
+                            <a href="full_users.php"><i class="fa fa-users fa-fw"></i> Usuários</a>
                         </li>
                         <li>
                             <a href="events.php"><i class="fa fa-table fa-fw"></i> Eventos</a>
+                            <li>
+                            <a href="mural_notification.php" style="color:#243d5b"><i class="fa fa-comments fa-fw" style="color:#243d5b"></i> Mural de recados</a>
+                        </li>
                         </li>
                     </ul>
                 </div>
@@ -141,79 +144,57 @@
                 <div class="col-lg-12">
                   
         <ul class="nav" id="side-menu" style="margin-right:30px">
-                    <h1 class="page-header">Usuários</h1>
-                    <li class="col-md-12" style="margin-left:25px">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Pesquisar...">
-                                <span class="input-group-btn">
-                                <button onclick="window.location.href='index.php'" class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>&bnsp
-                                
-                            </span>
-                            </div>
-                            <div class="input-group custom-search-form">
-                            <span class="input-group-btn">
-                               
-                            </span>
-                            
-                            </div>
-                            
-                            <!-- /input-group -->
-                        </li>
-                        <br><br>
+                    <h1 class="page-header">Mural de recados</h1>
+                    
+                        
     </ul>
                         </div>
     <br>
-<div class="container float-right">
-<div class="col-lg-12">            
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Nome</th>
-        <th>Sobrenome</th>
-        <th>Email</th>
-        <th>Data de nascimento</th>
-        <th>Função</th>
-        <th>Ramal</th>
-      </tr>
-    </thead>
-    <tbody>
-    <?php
-    require_once("../connection/connection.php");
-    $database = connection_db();
-    $query = mysqli_query($database,"SELECT * FROM users ORDER BY name_user ASC");
-    while($row = mysqli_fetch_assoc($query))
-    {
-        $data = array('Select'=>$row);
-    
-    $json = json_encode($data);
-    $obj = json_decode($json,true);
-    foreach($obj as $id)
-    {
-    $id_user = $id['id_user'];
-    $name = $id['name_user'];
-    $second_name = $id['second_name_user'];
-    $bd= $id['birthday_user'];
-    $function = $id['function_user'];
-    $phone = $id['phone_user'];
-    $email = $id['email_user'];
-    $ramal = $id['ramal_user'];
-    }
-      echo "<tr>
-        <td>$name</td>
-        <td>$second_name</td>
-        <td>$email</td>
-        <td>$bd</td>
-        <td>$function</td>
-        <td>$ramal</td>
-        </tr>";
-    }
-      ?>
-    </tbody>
-  </table>
-</div>
-    </div>
+        <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                        <i class="fa fa-comments fa-fw"></i> Mural de recados
+                        </div>
+                        <!-- /.panel-heading -->
+
+                        <div class="panel-body">
+                            <div class="list-group">
+                                
+                                    <?php
+                                        require_once("../connection/connection.php");                                        
+                                        $database = connection_db();
+                                        $data = array();
+                                        $query = mysqli_query($database,"SELECT * FROM messages ORDER BY date_message DESC;");
+                                        while($row = mysqli_fetch_assoc($query))
+                                        {
+                                            $data = array('Select'=>$row);
+                                            $json = json_encode($data);
+                                        $obj = json_decode($json,true);
+                                        foreach($obj as $id)
+                                        {
+                                        $id_message = $id['id_message'];
+                                        $title = $id['title_message'];
+                                        $text = $id['text_message'];
+                                        }
+                                        echo "<a class=\"list-group-item\">
+                                        <b>$title:  </b>
+                                        $text</a>";
+                                        
+                                        }
+                                        
+                                    ?>
+                                
+                                
+                            </div>
+                            
+                        </div>
+                        
+                        <!-- /.panel-body -->
+                    </div>  
+
+            <!-- /.row -->
+        </div>
+
                 </div>
                 <!-- /.col-lg-12 -->
             </div>

@@ -128,7 +128,7 @@
                             <li class=\"divider\"></li>
                             <li><a href=\"../php/login/finalizeLogin.php\"><i class=\"fa fa-table fa-fw\"></i> Eventos</a></li>
                             <li class=\"divider\"></li>
-                            <li><a href=\"../php/login/finalizeLogin.php\"><i class=\"fa fa-comments fa-fw\"></i> Recados</a></li>
+                            <li><a href=\"mural_admin.php\"><i class=\"fa fa-comments fa-fw\"></i> Recados</a></li>
                             <li class=\"divider\"></li>
                             <li><a href=\"../php/login/finalizeLogin.php\"><i class=\"fa fa-phone fa-fw\"></i> Ramais</a></li>
                             <li class=\"divider\"></li>
@@ -181,6 +181,9 @@
                         <li>
                             <a href="events.php"><i class="fa fa-table fa-fw"></i> Eventos</a>
                         </li>
+                        <li>
+                            <a href="mural_notification.php"><i class="fa fa-comments fa-fw"></i> Mural de recados</a>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -197,7 +200,8 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-            <div class="row">
+            
+                  <div class="row">
                 <div class="col-lg-8">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -210,7 +214,7 @@
 
                             require_once("../connection/connection.php");
                             $database = connection_db();
-                            $query = mysqli_query($database,"SELECT * FROM notifications ORDER BY time_notification DESC LIMIT 5;");
+                            $query = mysqli_query($database,"SELECT * FROM notifications ORDER BY time_notification DESC LIMIT 8;");
                             while($row = mysqli_fetch_assoc($query))
                             {       
                                 $data = array('Select'=>$row);
@@ -224,8 +228,7 @@
                             }
                             
                             echo " <li>
-                            <div class=\"timeline-badge\"><i class=\"fa fa-clock-o\"></i>
-                            </div>
+                           
                             <div class=\"timeline-panel\">
                                 <div class=\"timeline-heading\">
                                     <h4 class=\"timeline-title\">$title</h4>
@@ -246,6 +249,7 @@
                     </div>
                     <!-- /.panel -->
                 </div>
+
                 <!-- /.col-lg-8 -->
                 <div class="col-lg-4">
                     <div class="panel panel-default">
@@ -373,51 +377,6 @@
                 <!-- /.col-lg-4 -->
             </div>
 
-        <div class="col-lg-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                        <i class="fa fa-comments fa-fw"></i> Mural de recados
-                        </div>
-                        <!-- /.panel-heading -->
-
-                        <div class="panel-body">
-                            <div class="list-group">
-                                
-                                    <?php
-                                        require_once("../connection/connection.php");                                        
-                                        $database = connection_db();
-                                        $data = array();
-                                        $query = mysqli_query($database,"SELECT * FROM messages ORDER BY date_message DESC;");
-                                        while($row = mysqli_fetch_assoc($query))
-                                        {
-                                            $data = array('Select'=>$row);
-                                            $json = json_encode($data);
-                                        $obj = json_decode($json,true);
-                                        foreach($obj as $id)
-                                        {
-                                        $id_message = $id['id_message'];
-                                        $title = $id['title_message'];
-                                        $text = $id['text_message'];
-                                        }
-                                
-                                        $date = preg_split('[-]', $date1);
-                                        echo "<a class=\"list-group-item\">
-                                        <i class=\"fa fa-bithday fa-fw\"></i>".$title."</a>";
-                                        
-                                        }
-                                        
-                                    ?>
-                                
-                                
-                            </div>
-                            
-                        </div>
-                        
-                        <!-- /.panel-body -->
-                    </div>  
-
-            <!-- /.row -->
-        </div>
         <!-- /#page-wrapper -->
 
     </div>
